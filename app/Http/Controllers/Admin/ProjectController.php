@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -27,8 +28,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        $technologies = Technology::all();
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -39,6 +41,7 @@ class ProjectController extends Controller
         // dd($request->all());
         $val_data = $request->validated();
 
+        // dd($val_data);
         $val_data['slug'] = Str::slug($val_data['name'], '-');
 
         $name = $val_data['name'];
@@ -49,12 +52,18 @@ class ProjectController extends Controller
             $val_data['video'] = Storage::disk('public')->put('uploads/videos', $val_data['video']);
         }
 
+
         // dd($val_data);
 
         // dd($val_data['cover_image']);
         // dd($val_data['slug'], $val_data);
-        Project::create($val_data);
+        $project = Project::create($val_data);
 
+        if ($request->has('technologies')) {
+
+            $project->technologies()->attach($val_data['technologies']);
+        }
+        // dd($project);
         return to_route('admin.projects.index')->with('message', "You created new project: $name");
     }
 

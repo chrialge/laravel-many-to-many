@@ -62,9 +62,10 @@
                 @endif
 
                 <span class="d-block py-2"><strong>URL: </strong> {{ $project->url }}</span>
-                <span><strong>Type: </strong>{{ $project->type ? $project->type->name : 'Untyped' }}</span>
+                <span class="d-block py-2"><strong>Type:
+                    </strong>{{ $project->type ? $project->type->name : 'Untyped' }}</span>
 
-                <span>
+                <span class=" d-block py-2">
                     <strong>Technology: </strong>
 
                     @forelse ($project->technologies as $technology)
