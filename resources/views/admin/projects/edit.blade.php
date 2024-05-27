@@ -51,7 +51,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="video" class="form-label">video</label>
+                <label for="video" class="form-label">Video</label>
                 <input type="file" class="form-control @error('video') is-invalid @enderror" name="video"
                     id="video" aria-describedby="urlHelper" value="{{ old('video', $project->video) }}" />
                 <small id="urlHelper" class="form-text text-muted">Type a video for the current project</small>
@@ -62,7 +62,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="type_id" class="form-label">type</label>
+                <label for="type_id" class="form-label">Type</label>
                 <select class="form-select form-select-lg" name="type_id" id="type_id">
                     <option selected disabled>Select a category</option>
                     @foreach ($types as $type)
@@ -72,6 +72,35 @@
                 </select>
             </div>
 
+            <div class="row">
+                <h5>Technologies</h5>
+                @foreach ($technologies as $technology)
+                    @if ($errors->any())
+                        <div class="col">
+                            <div class="form-check">
+                                <input name="technologies[]" class="form-check-input" type="checkbox"
+                                    value="{{ $technology->id }}" id="technology-{{ $technology->id }}"
+                                    {{ in_array($technology->id, old('technologies', $technology->id)) ? 'checked' : '' }} />
+                                <label class="form-check-label" for="technology-{{ $technology->id }}">
+                                    {{ $technology->name }} </label>
+                            </div>
+
+                        </div>
+                    @else
+                        <div class="col">
+                            <div class="form-check">
+                                <input name="technologies[]" class="form-check-input" type="checkbox"
+                                    value="{{ $technology->id }}" id="technology-{{ $technology->id }}"
+                                    {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }} />
+                                <label class="form-check-label" for="technology-{{ $technology->id }}">
+                                    {{ $technology->name }} </label>
+                            </div>
+
+                        </div>
+                    @endif
+                @endforeach
+
+            </div>
 
             <div class="mb-3">
                 <label for="status" class="form-label">Status</label>
@@ -100,7 +129,8 @@
                 <input type="text" class="form-control @error('finish_date') is-invalid @enderror" name="finish_date"
                     id="finish_date" aria-describedby="finishDateHelper" placeholder="2024-03-20"
                     value="{{ old('finish_date', $project->finish_date) }}" />
-                <small id="finishDateHelper" class="form-text text-muted">Type a finish date for the current project</small>
+                <small id="finishDateHelper" class="form-text text-muted">Type a finish date for the current
+                    project</small>
 
                 @error('finish_data')
                     <div class="text-danger">{{ $message }}</div>

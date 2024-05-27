@@ -54,7 +54,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="video" class="form-label">video</label>
+                <label for="video" class="form-label">Video</label>
                 <input type="file" class="form-control @error('video') is-invalid @enderror" name="video"
                     id="video" aria-describedby="urlHelper" value="{{ old('video') }}" />
                 <small id="urlHelper" class="form-text text-muted">Type a video for the current project</small>
@@ -67,7 +67,7 @@
 
 
             <div class="mb-3">
-                <label for="type_id" class="form-label">type</label>
+                <label for="type_id" class="form-label">Type</label>
                 <select class="form-select form-select-lg" name="type_id" id="type_id">
                     <option selected disabled>Select a category</option>
                     @foreach ($types as $type)

@@ -80,9 +80,10 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        $technologies = Technology::all();
         $types = Type::all();
 
-        return view('admin.projects.edit', compact('project'), compact('types'));
+        return view('admin.projects.edit', compact('project', 'technologies', 'types'));
     }
 
     /**
@@ -94,10 +95,8 @@ class ProjectController extends Controller
 
         $val_data = $request->validated();
         $val_data['slug'] = Str::slug($val_data['name'], '-');
-        // dd($val_data['slug'], $val_data);
 
-        // dd($val_data['cover_image']);
-        // dd($project->cover_image);
+        // dd($val_data);
         if ($request->has('cover_image')) {
 
             if ($project->cover_image) {
@@ -117,6 +116,11 @@ class ProjectController extends Controller
 
         // dd($project['cover_image'], $project->cover_image);
         $project->update($val_data);
+
+        if ($request->has('technologies')) {
+
+            $project->technologies()->sync($val_data['technologies']);
+        }
         return to_route('admin.projects.index', $project)->with('message', "You updated project: $project->name");
     }
 
@@ -133,6 +137,6 @@ class ProjectController extends Controller
             Storage::disk('public')->delete($project->video);
         }
         $project->delete();
-        return redirect()->back()->with('message', "You delete  project: $project->name");;
+        return redirect()->back()->with('message', "You delete  project: $project->name");
     }
 }
