@@ -63,6 +63,20 @@
 
                 <span class="d-block py-2"><strong>URL: </strong> {{ $project->url }}</span>
                 <span><strong>Type: </strong>{{ $project->type ? $project->type->name : 'Untyped' }}</span>
+
+                <span>
+                    <strong>Technology: </strong>
+
+                    @forelse ($project->technologies as $technology)
+                        {{ $technology->name }}
+                    @empty
+                        I don't have this information
+                    @endforelse
+
+
+                </span>
+
+
                 <p class="py-2">
                     <strong>Description:</strong>
                     @if (isset($project->description))
