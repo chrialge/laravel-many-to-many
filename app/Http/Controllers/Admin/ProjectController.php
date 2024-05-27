@@ -80,10 +80,18 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        $id_technologies = $project->technologies;
+
+        $id_tech = [];
+        foreach ($id_technologies as $id) {
+            array_push($id_tech, $id->id);
+        }
+
+
         $technologies = Technology::all();
         $types = Type::all();
 
-        return view('admin.projects.edit', compact('project', 'technologies', 'types'));
+        return view('admin.projects.edit', compact('project', 'technologies', 'types', 'id_tech'));
     }
 
     /**
