@@ -25,6 +25,9 @@
                         <a href="{{ route('admin.types.index') }}" class="btn btn-dark mt-2">
                             My types
                         </a>
+                        <a href="{{ route('admin.technologies.index') }}" class="btn btn-warning mt-2">
+                            My technology
+                        </a>
                     </div>
                 </div>
             </div>

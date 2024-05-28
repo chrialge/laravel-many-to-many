@@ -105,9 +105,9 @@
             <div class="mb-3">
                 <label for="status" class="form-label">Status</label>
                 <select class="form-select form-select-lg" name="status" id="status">
-                    <option value="0">Completed</option>
-                    <option value="1" selected>Incompleted</option>
-                    <option value="2">don't initialized</option>
+                    <option value="0" {{ $project->status == 0 ? 'selected' : ' ' }}>Completed</option>
+                    <option value="1" {{ $project->status == 1 ? 'selected' : ' ' }}>Incompleted</option>
+                    <option value="2" {{ $project->status == 2 ? 'selected' : ' ' }}>don't initialized</option>
                 </select>
             </div>
 
@@ -124,11 +124,13 @@
                 @enderror
             </div>
 
+            {{-- @dd($project->status) --}}
             <div class="mb-3">
                 <label for="finish_date" class="form-label">Finish Date</label>
                 <input type="text" class="form-control @error('finish_date') is-invalid @enderror" name="finish_date"
                     id="finish_date" aria-describedby="finishDateHelper" placeholder="2024-03-20"
-                    value="{{ old('finish_date', $project->finish_date) }}" />
+                    value="{{ old('finish_date', $project->finish_date) }}"
+                    {{ $project->status == 0 ? 'disabled' : ' ' }} />
                 <small id="finishDateHelper" class="form-text text-muted">Type a finish date for the current
                     project</small>
 
