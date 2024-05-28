@@ -83,7 +83,7 @@
                                     <td>
                                         {{ $type->slug }}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         {{ $type->projects->count() }}
                                     </td>
 

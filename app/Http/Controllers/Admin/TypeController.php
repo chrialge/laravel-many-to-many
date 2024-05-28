@@ -27,6 +27,8 @@ class TypeController extends Controller
         $val_data = $request->validated();
         $name = $val_data['name'];
         // dd($val_data);
+        $val_data['slug'] = Str::slug($val_data['name'], '-');
+        // dd($val_data);
         Type::create($val_data);
         return to_route('admin.types.index')->with('message', "You created new project: $name");
     }

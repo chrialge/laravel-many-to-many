@@ -83,8 +83,10 @@
                                     <td>
                                         {{ $technology->slug }}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
+
                                         {{ $technology->projects->count() }}
+
                                     </td>
 
 

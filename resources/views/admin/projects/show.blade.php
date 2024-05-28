@@ -71,8 +71,12 @@
                     @forelse ($project->technologies as $technology)
                         <span class=" badge bg-dark">
                             {{ $technology->name }}
-                        </span>
-
+                        </span>,
+                        @if ($loop->last)
+                            <span class=" badge bg-dark">
+                                {{ $technology->name }}
+                            </span>
+                        @endif
                     @empty
                         <span class=" badge bg-dark">
                             N/A
