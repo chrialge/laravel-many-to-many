@@ -16,7 +16,7 @@ class TechnologyController extends Controller
     public function index()
     {
         $technologies = Technology::all();
-        return view('admin.technologies.index', ['technologies' => Technology::orderByDesc('id')->paginate(8)]);
+        return view('admin.technologies.index', ['technologies' => Technology::orderByDesc('id')->paginate(6)]);
     }
 
 

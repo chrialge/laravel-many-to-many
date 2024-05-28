@@ -65,7 +65,7 @@
                                                 <input type="text"
                                                     class="form-control @error('name') is-invalid @enderror" name="name"
                                                     id="name" aria-describedby="nameHelper"
-                                                    placeholder="Lavarel-project" value="{{ old('name', $type->name) }}" />
+                                                    placeholder="Lavarel-project" value="{{ old($type->name) }}" />
 
                                                 <button class="btn btn-primary " type="submit">
                                                     Edit
@@ -165,11 +165,12 @@
                         </tbody>
                     </table>
                 </div>
+                {{ $types->links('pagination::bootstrap-5') }}
+
             </div>
         </div>
 
 
-        {{ $types->links('pagination::bootstrap-5') }}
 
     </div>
 @endsection

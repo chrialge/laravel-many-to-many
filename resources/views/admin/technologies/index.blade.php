@@ -65,8 +65,7 @@
                                                 <input type="text"
                                                     class="form-control @error('name') is-invalid @enderror" name="name"
                                                     id="name" aria-describedby="nameHelper"
-                                                    placeholder="Lavarel-project"
-                                                    value="{{ old('name', $technology->name) }}" />
+                                                    placeholder="Lavarel-project" value="{{ old($technology->name) }}" />
 
                                                 <button class="btn btn-primary " type="submit">
                                                     Edit
