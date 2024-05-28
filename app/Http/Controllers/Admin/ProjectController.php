@@ -128,6 +128,8 @@ class ProjectController extends Controller
         if ($request->has('technologies')) {
 
             $project->technologies()->sync($val_data['technologies']);
+        } else {
+            $project->technologies()->detach();
         }
         return to_route('admin.projects.index', $project)->with('message', "You updated project: $project->name");
     }

@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('types', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 70);
+            $table->string('slug', 70);
+            $table->tinyInteger('total_projects')->default(0);
             $table->timestamps();
         });
     }

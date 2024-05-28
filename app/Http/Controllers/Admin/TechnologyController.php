@@ -19,13 +19,6 @@ class TechnologyController extends Controller
         return view('admin.technologies.index', ['technologies' => Technology::orderByDesc('id')->paginate(8)]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('admin.technologies.create');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -51,13 +44,7 @@ class TechnologyController extends Controller
         return view('admin.technologies.show', compact('technology'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Technology $technology)
-    {
-        return view('admin.technologies.edit', compact('technology'));
-    }
+
 
     /**
      * Update the specified resource in storage.

@@ -69,9 +69,14 @@
                     <strong>Technology: </strong>
 
                     @forelse ($project->technologies as $technology)
-                        {{ $technology->name }}
+                        <span class=" badge bg-dark">
+                            {{ $technology->name }}
+                        </span>
+
                     @empty
-                        I don't have this information
+                        <span class=" badge bg-dark">
+                            N/A
+                        </span>
                     @endforelse
 
 
