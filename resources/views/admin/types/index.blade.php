@@ -4,7 +4,10 @@
     <div class="container" style="height: calc(100vh - 125px)">
         <div class="d-flex align-items-center justify-content-between py-5">
             <h3>Types</h3>
-
+            <a href="{{ route('admin.projects.index') }}" class="btn btn-dark">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                Return project
+            </a>
         </div>
 
         @include('partials.validate')
@@ -65,10 +68,12 @@
                                                 <input type="text"
                                                     class="form-control @error('name') is-invalid @enderror" name="name"
                                                     id="name" aria-describedby="nameHelper"
-                                                    placeholder="Lavarel-project" value="{{ old($type->name) }}" />
+                                                    placeholder="Lavarel-project" value="{{ $type->name }}" />
 
-                                                <button class="btn btn-primary " type="submit">
-                                                    Edit
+                                                <button class="btn btn-warning d-flex align-items-center gap-1"
+                                                    type="submit">
+                                                    <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px"></i>
+                                                    <span>Edit</span>
                                                 </button>
 
 

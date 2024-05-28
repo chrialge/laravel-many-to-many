@@ -7,27 +7,15 @@
                 <i class="fa-solid fa-arrow-left"></i>
             </a>
 
-            <a class="btn btn-dark" href="{{ route('admin.technologies.edit', $technology) }}"> <i
-                    class="fas fa-pencil-alt fa-sm fa-fw"></i>
-            </a>
-
         </div>
         <div class=" py-5">
 
             <div class="col">
 
-                <h3 class=" d-inline">Type Name: </h3>
+                <h3 class=" d-inline">Technology Name: </h3>
                 <span style="font-size: 30px;">{{ $technology->name }}</span>
             </div>
-            <p class="py-2">
-                <strong>Description:</strong>
-                @if (isset($technology->description))
-                    {{ $technology->description }}
-                @else
-                    N/A
-                @endif
 
-            </p>
 
         </div>
 
