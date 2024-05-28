@@ -62,21 +62,30 @@
                 @endif
 
                 <span class="d-block py-2"><strong>URL: </strong> {{ $project->url }}</span>
+
+                <span class="d-block py-2"><strong>Author: </strong>
+                    {{ $project->user ? $project->user->name : 'N/A' }}</span>
+
+
                 <span class="d-block py-2"><strong>Type:
                     </strong>{{ $project->type ? $project->type->name : 'Untyped' }}</span>
 
                 <span class=" d-block py-2">
                     <strong>Technology: </strong>
 
+
                     @forelse ($project->technologies as $technology)
-                        <span class=" badge bg-dark">
-                            {{ $technology->name }}
-                        </span>,
                         @if ($loop->last)
                             <span class=" badge bg-dark">
                                 {{ $technology->name }}
                             </span>
+                        @else
+                            <span class=" badge bg-dark">
+                                {{ $technology->name }}
+                            </span>,
                         @endif
+
+
                     @empty
                         <span class=" badge bg-dark">
                             N/A

@@ -103,7 +103,7 @@
             </div>
         </nav>
 
-        <main class=" bg-body-tertiary" style="padding-top: 100px">
+        <main class=" bg-body-tertiary" style="padding-top: 100px; height: 100vh;">
             @yield('content')
         </main>
     </div>

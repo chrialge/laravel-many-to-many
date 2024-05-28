@@ -10,6 +10,7 @@ use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -18,9 +19,11 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        if (auth()->user()->is_super_admin()) {
+            return view('admin.projects.index', ['projects' => Project::orderByDesc('id')->paginate(8)]);
+        }
 
-
-        return view('admin.projects.index', ['projects' => Project::orderByDesc('id')->paginate(8)]);
+        return view('admin.projects.index', ['projects' => Project::where('user_id', Auth::id())->orderByDesc('id')->paginate(8)]);
     }
 
     /**
@@ -39,6 +42,7 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         // dd($request->all());
+        // dd(Auth::user());
         $val_data = $request->validated();
 
         // dd($val_data);
@@ -54,7 +58,8 @@ class ProjectController extends Controller
 
 
         // dd($val_data);
-
+        $val_data['user_id'] = Auth::id();
+        //dd($val_data);
         // dd($val_data['cover_image']);
         // dd($val_data['slug'], $val_data);
         $project = Project::create($val_data);
@@ -63,6 +68,7 @@ class ProjectController extends Controller
 
             $project->technologies()->attach($val_data['technologies']);
         }
+        dd($val_data);
         // dd($project);
         return to_route('admin.projects.index')->with('message', "You created new project: $name");
     }
@@ -80,18 +86,21 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        $id_technologies = $project->technologies;
+        if (Auth::id() === $project->user_id || auth()->user()->is_super_admin()) {
+            $id_technologies = $project->technologies;
 
-        $id_tech = [];
-        foreach ($id_technologies as $id) {
-            array_push($id_tech, $id->id);
+            $id_tech = [];
+            foreach ($id_technologies as $id) {
+                array_push($id_tech, $id->id);
+            }
+
+
+            $technologies = Technology::all();
+            $types = Type::all();
+
+            return view('admin.projects.edit', compact('project', 'technologies', 'types', 'id_tech'));
         }
-
-
-        $technologies = Technology::all();
-        $types = Type::all();
-
-        return view('admin.projects.edit', compact('project', 'technologies', 'types', 'id_tech'));
+        abort(403, "Don't try mess up with other user project");
     }
 
     /**

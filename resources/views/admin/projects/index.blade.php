@@ -46,14 +46,20 @@
 
                             </td>
                             <td>{{ $project->start_date }}</td>
-                            <td>{{ $project->finish_date }}</td>
-                            @if ($project->status == 0)
-                                <td><i class="fa-solid fa-circle" style="color: #0fd212;"></i></td>
-                            @elseif ($project->status == 1)
-                                <td><i class="fa-solid fa-circle" style="color: #ebee53;"></i></td>
-                            @else
-                                <td><i class="fa-solid fa-circle" style="color: #fa0000;"></i></td>
-                            @endif
+                            <td>
+                                @if ($project->status === 0)
+                                    {{ $project->finish_date }}
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                @if ($project->status == 0)
+                                    <i class="fa-solid fa-circle" style="color: #0fd212;"></i>
+                                @elseif ($project->status == 1)
+                                    <i class="fa-solid fa-circle" style="color: #ebee53;"></i>
+                                @else
+                                    <i class="fa-solid fa-circle" style="color: #fa0000;"></i>
+                                @endif
+                            </td>
                             <td>
                                 <div class="d-flex justify-content-between alig-items-center gap-2">
                                     <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-dark">

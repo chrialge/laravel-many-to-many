@@ -32,7 +32,7 @@ class StoreProjectRequest extends FormRequest
             'finish_date' => 'nullable|date',
             'description' => 'nullable|max: 500',
             'notes' => 'nullable|max: 200',
-            'status' => 'required'
+            'status' => 'required|integer|max:2|min:0'
         ];
     }
 }
